@@ -41,3 +41,13 @@ class TestGenererMotsDePasse(TestCase):
         password = generer_mot_de_passe(8, False, True)
 
         self.assertIsInstance(password, str, "Le mot de passe doit être une chaîne de caractères")
+
+    # Test should raise an error cause of negative value
+    def test_taille_negative(self):
+        self.assertRaises(ValueError, generer_mot_de_passe, -5,False,True)
+
+    # Check if large size is supported by python
+    def test_taille_large(self):
+        password = generer_mot_de_passe(3_000_000, False, True)
+        self.assertEqual(len(password), 3_000_000)
+

@@ -3,6 +3,10 @@ import random
 from hashlib import sha256
 
 def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
+
+    if longueur <= 0:
+        raise ValueError("La taille du mot de passe doit être supérieur à 0")
+
     # Base du mot de passe : lettres majuscules et minuscules
     caracteres = string.ascii_letters
     
