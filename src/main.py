@@ -22,7 +22,7 @@ def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
 def hash_password(pwd):
     return sha256(pwd.encode('utf-8')).hexdigest()
 
-def mise_a_jour_mot_de_passe():
+def mise_a_jour_mot_de_passe(*args):
     try:        
         # Récupérer les valeurs des widgets
         longueur = slider_longueur.get()
