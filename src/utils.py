@@ -1,6 +1,6 @@
 import string
 import random
-from hashlib import sha256
+import hashlib
 from re import search
 
 def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
@@ -37,8 +37,10 @@ def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
 
     # Génération du mot de passe à partir de la base de caractères
 
-def hash_password(pwd):
-    return sha256(pwd.encode('utf-8')).hexdigest()
+def hash_password(pwd, hash_method='sha256'):
+    hasher = hashlib.new(hash_method)
+    hasher.update(pwd.encode('utf-8'))
+    return hasher.hexdigest()
 
 def demande_input(prompt):
     res = input(prompt).lower()

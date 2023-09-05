@@ -1,4 +1,5 @@
 import tkinter as tk
+import hashlib
 from tkinter import ttk
 from playsound import playsound
 from utils import generer_mot_de_passe, hash_password
@@ -14,10 +15,26 @@ def mise_a_jour_mot_de_passe(*args):
         mot_de_passe = generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles)
         # Afficher le mot de passe généré
         lbl_resultat.config(text=mot_de_passe)
-        lbl_resultat_hash.config(text=hash_password(mot_de_passe))
+
+        # Hachage du mot de passe
+
+        methode_hashage = combo_hashage.get()
+
+        if not methode_hashage:
+            combo_hashage.set("sha256")
+            methode_hashage = "sha256"
+        
+        lbl_resultat_hash.config(text=hash_password(mot_de_passe, methode_hashage))
         copier_presse_papier()
     except:
         pass
+
+
+def refresh_hash(*args):
+    methode_hashage = combo_hashage.get()
+    if methode_hashage:
+        lbl_resultat_hash.config(text=hash_password(lbl_resultat.cget("text"), methode_hashage))
+        
 
 def update_slider_label(val):
     # Si c'est la même valeur en int, on ne refresh pas le mot de passe
@@ -42,7 +59,7 @@ app = tk.Tk()
 app.title("Générateur de mot de passe")
 
 # Fixer la taille de la fenêtre
-app.geometry("400x250")
+app.geometry("400x300")
 app.configure(bg='#FCFCFD')
 app.resizable(False, True)
 
@@ -82,17 +99,24 @@ chk_symboles_var.trace_add("write", mise_a_jour_mot_de_passe)
 chk_symboles = ttk.Checkbutton(frame, text="Inclure des symboles", variable=chk_symboles_var)
 chk_symboles.grid(column=1, row=1, sticky=tk.W, pady=5)
 
+# Sélecteur de méthode de hachage
+lbl_hashage = ttk.Label(frame, text="Méthode de hachage :")
+lbl_hashage.grid(column=0, row=2, sticky=tk.W, pady=5)
+combo_hashage = ttk.Combobox(frame, values=["md5", "sha1", "sha224", "sha256", "sha384", "sha512", "blake2b", "blake2s", "sha3_224", "sha3_256", "sha3_384", "sha3_512", "shake_128", "shake_256"], state="readonly")
+combo_hashage.grid(column=1, row=2, sticky=(tk.W, tk.E), pady=5)
+combo_hashage.bind("<<ComboboxSelected>>", refresh_hash)
+
 # Label pour afficher le mot de passe généré
 lbl_resultat = ttk.Label(frame, text="", font=("Arial", 14, "bold"))
-lbl_resultat.grid(column=0, row=2, columnspan=2, pady=5)
+lbl_resultat.grid(column=0, row=3, columnspan=2, pady=5)
 
 # Label pour afficher le hash du mot de passe généré
 lbl_resultat_hash = ttk.Label(frame, text="", font=("Arial", 14, "italic"))
-lbl_resultat_hash.grid(column=0, row=4, columnspan=3, pady=5)
+lbl_resultat_hash.grid(column=0, row=5, columnspan=3, pady=5)
 
 # Bouton pour copier le mot de passe dans le presse-papier
 btn_copier = ttk.Button(frame, text="Copier", command=copier_presse_papier)
-btn_copier.grid(column=0, row=5, pady=5, columnspan=3)
+btn_copier.grid(column=0, row=6, pady=5, columnspan=3)
 
 # Générer un premier mot de passe au lancement de l'application
 mise_a_jour_mot_de_passe()
