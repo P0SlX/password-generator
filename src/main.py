@@ -1,5 +1,7 @@
 import string
 import random
+from hashlib import sha256
+
 
 def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
     # Base du mot de passe : lettres majuscules et minuscules
@@ -15,6 +17,9 @@ def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
 
     # Génération du mot de passe à partir de la base de caractères
     return ''.join(random.choice(caracteres) for _ in range(longueur))
+
+def hash_password(pwd):
+    return sha256(pwd.encode('utf-8')).hexdigest()
 
 def main():
     # Longueur du mot de passe
