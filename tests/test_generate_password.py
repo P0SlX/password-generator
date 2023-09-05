@@ -1,6 +1,7 @@
 from unittest import TestCase
 from re import search
-from src.main import generer_mot_de_passe
+from src.utils import generer_mot_de_passe, hash_password
+from hashlib import sha256
 
 class TestGenererMotsDePasse(TestCase):
 
@@ -12,7 +13,7 @@ class TestGenererMotsDePasse(TestCase):
         self.assertIsNone(match, "Le mot de passe ne doit contenir que des lettres: " + password)
 
     def test_caractere_speciaux(self):
-        password = generer_mot_de_passe(10, True, False)
+        password = generer_mot_de_passe(10, False, True)
 
         # Check that the password contains at least one special character
         match = search(r'[^\w\s]', password)
@@ -27,5 +28,10 @@ class TestGenererMotsDePasse(TestCase):
     def test_hash(self):
         password = generer_mot_de_passe(8, False, True)
 
-        # Check that the password is hashed
-        self.assertTrue(password.startswith("$2"), "Le mot de passe doit être hashé: " + password)
+        # Hash the password using SHA256
+        hashed_password = sha256(password.encode()).hexdigest()
+
+        pwd = hash_password(password)
+
+        # Check that the password is a SHA256 hash
+        self.assertEqual(hashed_password, pwd, "Le mot de passe doit être un hash SHA256: " + password)
