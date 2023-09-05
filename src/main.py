@@ -34,11 +34,13 @@ app = tk.Tk()
 app.title("Générateur de mot de passe")
 
 # Fixer la taille de la fenêtre
-app.geometry("400x225")
-app.resizable(False, False)
+app.geometry("400x250")
+app.configure(bg='#FCFCFD')
+app.resizable(False, True)
 
 # Configuration du style
 style = ttk.Style()
+style.theme_use("default")
 style.configure("TFrame", background="#FCFCFD")
 style.configure("TLabel", background="#FCFCFD", foreground="#1D1D1F", font=("Arial", 12), wraplength=300)
 style.configure("TCheckbutton", background="#FCFCFD", foreground="#1D1D1F", font=("Arial", 12))
