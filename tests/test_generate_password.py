@@ -35,3 +35,9 @@ class TestGenererMotsDePasse(TestCase):
 
         # Check that the password is a SHA256 hash
         self.assertEqual(hashed_password, pwd, "Le mot de passe doit être un hash SHA256: " + password)
+
+    # Check if generate password is string
+    def test_type(self):
+        password = generer_mot_de_passe(8, False, True)
+
+        self.assertIsInstance(password, str, "Le mot de passe doit être une chaîne de caractères")
