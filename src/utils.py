@@ -1,6 +1,7 @@
 import string
 import random
 from hashlib import sha256
+from re import search
 
 def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
 
@@ -23,3 +24,11 @@ def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
 
 def hash_password(pwd):
     return sha256(pwd.encode('utf-8')).hexdigest()
+
+def demande_input(prompt):
+    res = input(prompt).lower()
+
+    if search(r'\d', res):
+        raise ValueError("La réponse ne doit pas être un nombre")
+
+    return res
