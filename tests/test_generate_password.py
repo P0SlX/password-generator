@@ -1,6 +1,6 @@
 from unittest import TestCase
 from re import search
-from ..src.main import generer_mot_de_passe
+from src.main import generer_mot_de_passe
 
 class TestGenererMotsDePasse(TestCase):
 
