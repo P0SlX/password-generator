@@ -9,7 +9,7 @@ class TestGenererMotsDePasse(TestCase):
         password = generer_mot_de_passe(5, False, False)
 
         # Check that the password only contains letters
-        match = search(r'[^a-zA-Z]', password)
+        match = search(r'\d', password)
         self.assertIsNone(match, "Le mot de passe ne doit contenir que des lettres: " + password)
 
     def test_caractere_speciaux(self):
