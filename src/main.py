@@ -23,6 +23,15 @@ def update_slider_label(val):
 app = tk.Tk()
 app.title("Générateur de mot de passe")
 
+# Configuration du style
+style = ttk.Style()
+style.configure("TFrame", background="#FCFCFD")
+style.configure("TLabel", background="#FCFCFD", foreground="#1D1D1F", font=("Arial", 12))
+style.configure("TCheckbutton", background="#FCFCFD", foreground="#1D1D1F", font=("Arial", 12))
+style.configure("TButton", font=("Arial", 12, "bold"))
+style.configure("TScale", background="#ECECEF", troughcolor="#D9D9DA", sliderlength=20)
+
+
 frame = ttk.Frame(app, padding="10")
 frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
