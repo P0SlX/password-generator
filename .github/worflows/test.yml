@@ -21,3 +21,4 @@ jobs:
 
       - name: Résumé
         run: echo "### Exécution des tests (\`${{ env.BRANCH_NAME }}\`) effectué avec succès ! :rocket:" >> $GITHUB_STEP_SUMMARY
+        
