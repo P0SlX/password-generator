@@ -1,0 +1,27 @@
+name: test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Run Python unit tests
+      run: python3 -u -m unittest tests/*.py
+
+    - name: Résumé
+      run: echo "### Exécution des tests (\`${{ env.BRANCH_NAME }}\`) effectué avec succès ! :rocket:" >> $GITHUB_STEP_SUMMARY

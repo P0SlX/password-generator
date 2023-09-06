@@ -28,3 +28,7 @@ Des tests approfondis ont été réalisés pour s'assurer que la génération de
 ## Documentation
 
 Le code est documenté pour expliquer le fonctionnement de chaque fonction. Les dépendances nécessaires sont `tkinter` pour l'interface graphique et les modules `string` et `random` pour la génération du mot de passe.
+
+# Structure d'un cas de test fonctionnel
+Nom du cas test - Objectif - Préconditions
+Scénario du test - Description - Conditions au préalables
