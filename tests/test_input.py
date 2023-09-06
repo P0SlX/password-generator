@@ -1,5 +1,5 @@
 from unittest import TestCase
-from src.utils import demande_input
+from src.utilitaire import demande_input
 from unittest.mock import patch
 
 class TestInput(TestCase):

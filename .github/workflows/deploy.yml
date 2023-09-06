@@ -35,7 +35,7 @@ jobs:
         run: pip3 install -r requirements.txt
 
       - name: Run Python unit tests
-        run: python3 -u -m unittest tests/suite.py
+        run: python3 -u -m unittest tests/test_suite.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
