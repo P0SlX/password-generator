@@ -1,7 +1,8 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from re import search
 from src.utils import generer_mot_de_passe, hash_password
 from hashlib import sha256
+import HtmlTestRunner
 
 class TestGenererMotsDePasse(TestCase):
 
