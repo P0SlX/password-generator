@@ -34,9 +34,6 @@ jobs:
       - name: Install requirements
         run: pip3 install -r requirements.txt
 
-      - name: Install Xfvb
-        run: sudo apt-get install xvfb
-
       - name: Run Python unit tests
         run: python3 -u -m unittest tests/test_suite.py
 

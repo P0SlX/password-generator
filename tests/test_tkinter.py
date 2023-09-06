@@ -6,7 +6,7 @@ class TestTkinter(TestCase):
 
     @classmethod
     def setUpClass(self):
-        self.display = Display(visible=False, size=(1024, 768))
+        self.display = Display(visible=False, backend="xvfb")
         self.display.start()
     
     @classmethod
