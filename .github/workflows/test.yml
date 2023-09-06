@@ -27,7 +27,7 @@ jobs:
 
       - name: Publish html
         run: |
-          git add report_testing && git commit -m ':lipstick: new report'
+          git add -f report_testing && git commit -m ':lipstick: new report'
           git subtree push --prefix report_testing origin report_page
 
       - name: Résumé
