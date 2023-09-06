@@ -8,4 +8,4 @@ test_input = TestLoader().loadTestsFromTestCase(TestInput)
 
 suite = TestSuite([test_password, test_input])
 
-HTMLTestRunner(output='report_testing', combine_reports=True, report_name="report_testing", add_timestamp=False).run(suite)
+HTMLTestRunner(output='report_testing', combine_reports=True, report_name="index", add_timestamp=False).run(suite)
