@@ -50,3 +50,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+      
+      - name: Report HTML
+        run: echo "### Génération du reporting html effectué avec succès https://p0slx.github.io/password-generator/ ! :rocket:" >> $GITHUB_STEP_SUMMARY
