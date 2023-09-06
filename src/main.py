@@ -6,6 +6,9 @@ from utils import generer_mot_de_passe, hash_password
 from threading import Thread
 
 def mise_a_jour_mot_de_passe(*args):
+    """
+    Met à jour le mot de passe généré et son hachage, puis copie le mot de passe dans le presse-papier.
+    """
     try:        
         # Récupérer les valeurs des widgets
         longueur = slider_longueur.get()
@@ -17,7 +20,6 @@ def mise_a_jour_mot_de_passe(*args):
         lbl_resultat.config(text=mot_de_passe)
 
         # Hachage du mot de passe
-
         methode_hashage = combo_hashage.get()
 
         if not methode_hashage:
@@ -31,27 +33,44 @@ def mise_a_jour_mot_de_passe(*args):
 
 
 def refresh_hash(*args):
+    """
+    Rafraîchit le hachage du mot de passe affiché en fonction de la méthode de hachage sélectionnée.
+    """
     methode_hashage = combo_hashage.get()
     if methode_hashage:
+        # Mettre à jour l'affichage du hachage
         lbl_resultat_hash.config(text=hash_password(lbl_resultat.cget("text"), methode_hashage))
         
 
 def update_slider_label(val):
-    # Si c'est la même valeur en int, on ne refresh pas le mot de passe
+    """
+    Met à jour l'étiquette du curseur et déclenche la mise à jour du mot de passe en cas de changement de valeur.
+    
+    :param val: Nouvelle valeur du curseur.
+    """
     if int(float(val)) == int(float(lbl_slider_value.cget("text"))):
         return
     
     try:
+        # Jouer un son si la valeur du curseur est 21 (Easter egg)
         if int(float(val)) == 21:
             Thread(target=playsound, args=("song/lit.mp3",), daemon=True).start()
     except:
         print("No sound to play")
 
+    # Mettre à jour l'étiquette du curseur
     lbl_slider_value.config(text=str(int(float(val))))
+
+    # Mettre à jour le mot de passe en fonction de la nouvelle valeur du curseur
     mise_a_jour_mot_de_passe()
 
 def copier_presse_papier():
+    """
+    Copie le mot de passe généré dans le presse-papier de l'application.
+    """
     mot_de_passe = lbl_resultat.cget("text")
+
+    # Effacer le presse-papier et y ajouter le mot de passe généré
     app.clipboard_clear()
     app.clipboard_append(mot_de_passe)
 
@@ -63,7 +82,7 @@ app.geometry("400x300")
 app.configure(bg='#FCFCFD')
 app.resizable(False, True)
 
-# Configuration du style
+# Configuration du style avec un autowrap, un fond blanc et une police Arial
 style = ttk.Style()
 style.theme_use("default")
 style.configure("TFrame", background="#FCFCFD")
@@ -72,9 +91,11 @@ style.configure("TCheckbutton", background="#FCFCFD", foreground="#1D1D1F", font
 style.configure("TButton", font=("Arial", 12, "bold"))
 style.configure("TScale", background="#ECECEF", troughcolor="#D9D9DA", sliderlength=20)
 
+# Création du frame principal
 frame = ttk.Frame(app, padding="10")
 frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
+# Label pour afficher la longueur du mot de passe
 lbl_longueur = ttk.Label(frame, text="Longueur du mot de passe ")
 lbl_longueur.grid(column=0, row=0, sticky=tk.W, pady=5)
 
