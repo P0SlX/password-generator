@@ -1,9 +1,6 @@
 import tkinter as tk
-import hashlib
 from tkinter import ttk
-from playsound import playsound
 from utils import generer_mot_de_passe, hash_password
-from threading import Thread
 
 def mise_a_jour_mot_de_passe(*args):
     """
@@ -50,13 +47,13 @@ def update_slider_label(val):
     """
     if int(float(val)) == int(float(lbl_slider_value.cget("text"))):
         return
-    
-    try:
+       
+    #try:
         # Jouer un son si la valeur du curseur est 21 (Easter egg)
-        if int(float(val)) == 21:
-            Thread(target=playsound, args=("song/lit.mp3",), daemon=True).start()
-    except:
-        print("No sound to play")
+    #    if int(float(val)) == 21:
+    #        Thread(target=playsound, args=("song/lit.mp3",), daemon=True).start()
+    #except:
+    #    print("No sound to play")
 
     # Mettre à jour l'étiquette du curseur
     lbl_slider_value.config(text=str(int(float(val))))
