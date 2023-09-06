@@ -34,8 +34,8 @@ jobs:
       - name: Install requirements
         run: pip3 install -r requirements.txt
 
-      - name: Set DISPLAY
-        run: export DISPLAY=:99 && Xfvb :99
+      - name: Install Xfvb
+        run: sudo apt-get install xvfb
 
       - name: Run Python unit tests
         run: python3 -u -m unittest tests/test_suite.py
