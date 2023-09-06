@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from utils import generer_mot_de_passe, hash_password
+from .utils import generer_mot_de_passe, hash_password
 
 def mise_a_jour_mot_de_passe(*args):
     """
