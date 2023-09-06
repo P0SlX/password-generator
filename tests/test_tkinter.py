@@ -1,17 +1,7 @@
 from unittest import TestCase
 from src.application import Application
-from pyvirtualdisplay import Display
 
 class TestTkinter(TestCase):
-
-    @classmethod
-    def setUpClass(self):
-        self.display = Display(visible=False, backend="xvfb")
-        self.display.start()
-    
-    @classmethod
-    def tearDownClass(self):
-        self.display.stop()
 
     def tearDown(self) -> None:
         self.tk.app.destroy()
