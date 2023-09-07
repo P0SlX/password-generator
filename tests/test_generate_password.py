@@ -70,30 +70,54 @@ class TestGenererMotsDePasse(TestCase):
         self.assertEqual(len(password), 3_000_000)
 
     def test_contains_digits(self):
+        """
+        Vérifie si une chaîne de caractères contient au moins un chiffre.
+        """
         self.assertTrue(contains_digits("gfdhg12FDSGf"))
     
     def test_not_contains_digits(self):
+        """
+        Vérifie si une chaîne de caractères ne contient pas de chiffres.
+        """
         self.assertFalse(contains_digits("FFgfh$ùgfhfghkofh"))
 
     def test_contains_symboles(self):
+        """
+        Vérifie si une chaîne de caractères contient au moins un caractère spécial.
+        """
         self.assertTrue(contains_symboles("gfdg$$^gfdgd"))
 
     def test_not_contains_symboles(self):
+        """
+        Vérifie si une chaîne de caractères ne contient pas de caractères spéciaux.
+        """
         self.assertFalse(contains_symboles("gfdgdfg1321"))
 
     def test_contains_symboles_and_digits(self):
+        """
+        Vérifie si une chaîne de caractères contient à la fois des chiffres et des caractères spéciaux.
+        """
         pwd = "fdgfj1232FDGù^"
         self.assertTrue(contains_digits(pwd))
         self.assertTrue(contains_symboles(pwd))
     
     def test_notation_red(self):
+        """
+        Vérifie la notation d'un mot de passe en rouge.
+        """
         pwd = "1f$"
         self.assertEqual(notation_password(pwd), "#FA5339")
 
     def test_notation_orange(self):
+        """
+        Vérifie la notation d'un mot de passe en orange.
+        """
         pwd = "gfgf12gmpolg"
         self.assertEqual(notation_password(pwd), "#C74B1C")
 
     def test_notation_green(self):
+        """
+        Vérifie la notation d'un mot de passe en vert.
+        """
         pwd = "gr13GF^$5687lkj"
         self.assertEqual(notation_password(pwd),"#4DFA46")
