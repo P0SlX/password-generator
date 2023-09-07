@@ -1,6 +1,6 @@
 from unittest import TestCase
 from re import search
-from src.utilitaire import generer_mot_de_passe, hash_password
+from src.utilitaire import generer_mot_de_passe, hash_password, contains_digits, contains_symboles, notation_password
 from hashlib import sha256
 
 class TestGenererMotsDePasse(TestCase):
@@ -68,3 +68,32 @@ class TestGenererMotsDePasse(TestCase):
         """
         password = generer_mot_de_passe(3_000_000, False, True)
         self.assertEqual(len(password), 3_000_000)
+
+    def test_contains_digits(self):
+        self.assertTrue(contains_digits("gfdhg12FDSGf"))
+    
+    def test_not_contains_digits(self):
+        self.assertFalse(contains_digits("FFgfh$ùgfhfghkofh"))
+
+    def test_contains_symboles(self):
+        self.assertTrue(contains_symboles("gfdg$$^gfdgd"))
+
+    def test_not_contains_symboles(self):
+        self.assertFalse(contains_symboles("gfdgdfg1321"))
+
+    def test_contains_symboles_and_digits(self):
+        pwd = "fdgfj1232FDGù^"
+        self.assertTrue(contains_digits(pwd))
+        self.assertTrue(contains_symboles(pwd))
+    
+    def test_notation_red(self):
+        pwd = "1f$"
+        self.assertEqual(notation_password(pwd), "#FA5339")
+
+    def test_notation_orange(self):
+        pwd = "gfgf12gmpolg"
+        self.assertEqual(notation_password(pwd), "#C74B1C")
+
+    def test_notation_green(self):
+        pwd = "gr13GF^$5687lkj"
+        self.assertEqual(notation_password(pwd),"#4DFA46")

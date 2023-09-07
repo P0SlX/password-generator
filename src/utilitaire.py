@@ -68,7 +68,7 @@ def notation_password(pwd):
     if len(pwd) <= 8:
         return "#FA5339"
 
-    if contains_symboles() and contains_digits():
+    if contains_symboles(pwd) and contains_digits(pwd):
         return "#4DFA46"
     
     return "#C74B1C"
