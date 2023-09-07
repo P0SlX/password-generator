@@ -76,11 +76,11 @@ class Application():
 
         # Label pour afficher le mot de passe généré
         self.lbl_resultat = ttk.Label(self.frame, text="", font=("Arial", 14, "bold"))
-        self.lbl_resultat.grid(column=0, row=3, columnspan=2, pady=5)
+        self.lbl_resultat.grid(column=0, row=4, columnspan=2, pady=5)
 
         # Label pour afficher le hash du mot de passe généré
         self.lbl_resultat_hash = ttk.Label(self.frame, text="", font=("Arial", 14, "italic"))
-        self.lbl_resultat_hash.grid(column=0, row=5, columnspan=3, pady=5)
+        self.lbl_resultat_hash.grid(column=0, row=6, columnspan=3, pady=5)
 
     def __load_slider(self):
         # Slider pour choisir la longueur du mot de passe
@@ -101,20 +101,26 @@ class Application():
         self.chk_symboles = ttk.Checkbutton(self.frame, text="Inclure des symboles", variable=self.chk_symboles_var)
         self.chk_symboles.grid(column=1, row=1, sticky=tk.W, pady=5)
 
+        # Checkbox pour ajouter un salt au mot de passe
+        self.chk_salt_var = tk.BooleanVar()
+        self.chk_salt_var.trace_add("write", self.__mise_a_jour_mot_de_passe)
+        self.chk_salt = ttk.Checkbutton(self.frame, text="Ajouter un salt", variable=self.chk_salt_var)
+        self.chk_salt.grid(column=0, row=2, columnspan=2, sticky=tk.W, pady=5, padx=125)
+
     def __load_select_hash(self):
         # Sélecteur de méthode de hachage
         self.lbl_hashage = ttk.Label(self.frame, text="Méthode de hachage :")
-        self.lbl_hashage.grid(column=0, row=2, sticky=tk.W, pady=5)
+        self.lbl_hashage.grid(column=0, row=3, sticky=tk.W, pady=5)
         
         self.combo_hashage = ttk.Combobox(self.frame, values=["md5", "sha1", "sha224", "sha256", "sha384", "sha512", "blake2b", "blake2s", "sha3_224", "sha3_256", "sha3_384", "sha3_512", "shake_128", "shake_256"], state="readonly")
-        self.combo_hashage.grid(column=1, row=2, sticky=(tk.W, tk.E), pady=5)
+        self.combo_hashage.grid(column=1, row=3, sticky=(tk.W, tk.E), pady=5)
         self.combo_hashage.bind("<<ComboboxSelected>>", self.__refresh_hash)
 
 
     def __load_button(self):
         # Bouton pour copier le mot de passe dans le presse-papier
         btn_copier = ttk.Button(self.frame, text="Copier", command=self.__copier_presse_papier)
-        btn_copier.grid(column=0, row=6, pady=5, columnspan=3)
+        btn_copier.grid(column=0, row=7, pady=5, columnspan=3)
 
 
     def __mise_a_jour_mot_de_passe(self,*args):
@@ -126,8 +132,14 @@ class Application():
             longueur = self.slider_longueur.get()
             inclure_chiffres = self.chk_chiffres_var.get()
             inclure_symboles = self.chk_symboles_var.get()
+            need_salt = self.chk_salt_var.get()
+            
+            salt = ""
+            if need_salt:
+                salt = generer_mot_de_passe(4, inclure_chiffres, inclure_symboles)
+
             # Générer le mot de passe
-            mot_de_passe = generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles)
+            mot_de_passe = salt + generer_mot_de_passe(longueur - 4 if need_salt else longueur, inclure_chiffres, inclure_symboles)
 
             notation = notation_password(mot_de_passe)
 
