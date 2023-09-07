@@ -4,7 +4,7 @@ sys.path.append(".")
 
 import tkinter as tk
 from tkinter import ttk
-from src.utilitaire import generer_mot_de_passe, hash_password
+from src.utilitaire import generer_mot_de_passe, hash_password, notation_password
 
 class Application():
 
@@ -84,7 +84,7 @@ class Application():
 
     def __load_slider(self):
         # Slider pour choisir la longueur du mot de passe
-        self.slider_longueur = ttk.Scale(self.frame, from_=12, to_=30, orient=tk.HORIZONTAL, command=self.__update_slider_label)
+        self.slider_longueur = ttk.Scale(self.frame, from_=5, to_=30, orient=tk.HORIZONTAL, command=self.__update_slider_label)
         self.slider_longueur.set(14)
         self.slider_longueur.grid(column=1, row=0, sticky=(tk.W, tk.E), pady=5)
 
@@ -128,8 +128,11 @@ class Application():
             inclure_symboles = self.chk_symboles_var.get()
             # Générer le mot de passe
             mot_de_passe = generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles)
+
+            notation = notation_password(mot_de_passe)
+
             # Afficher le mot de passe généré
-            self.lbl_resultat.config(text=mot_de_passe)
+            self.lbl_resultat.config(text=mot_de_passe, foreground=notation)
 
             # Hachage du mot de passe
             methode_hashage = self.combo_hashage.get()
