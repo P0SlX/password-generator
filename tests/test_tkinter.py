@@ -97,7 +97,7 @@ class TestTkinter(TestCase):
         Vérifie que le mot de passe généré contient au moins un chiffre et un caractère spécial lorsque les deux cases à cocher sont cochées.
         """
 
-        for _ in range(10):
+        for _ in range(155):
             self.tk.chk_chiffres_var.set(True)
             self.tk.chk_symboles_var.set(True)
 
