@@ -96,11 +96,16 @@ class TestTkinter(TestCase):
         """
         Vérifie que le mot de passe généré contient au moins un chiffre et un caractère spécial lorsque les deux cases à cocher sont cochées.
         """
-        self.tk.chk_chiffres_var.set(True)
-        self.tk.chk_symboles_var.set(True)
 
-        self.assertTrue(contains_symboles(self.tk.lbl_resultat.cget("text")), f"Aucun caractère spécial n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
-        self.assertTrue(contains_digits(self.tk.lbl_resultat.cget("text")), f"Aucun nombre n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
+        for _ in range(10):
+            self.tk.chk_chiffres_var.set(True)
+            self.tk.chk_symboles_var.set(True)
+
+            self.assertTrue(contains_symboles(self.tk.lbl_resultat.cget("text")), f"Aucun caractère spécial n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
+            self.assertTrue(contains_digits(self.tk.lbl_resultat.cget("text")), f"Aucun nombre n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
+
+            self.tk.chk_chiffres_var.set(False)
+            self.tk.chk_symboles_var.set(False)
 
     def test_copy_button(self):
         """
