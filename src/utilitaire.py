@@ -57,3 +57,18 @@ def demande_input(prompt):
         raise ValueError("La réponse ne doit pas être un nombre")
 
     return res
+
+def contains_symboles(pwd):
+    return any(c in "!@#$%^&*()_+-=[]{};:,.<>/?\\" for c in pwd)
+
+def contains_digits(pwd):
+    return any(c.isdigit() for c in pwd)
+
+def notation_password(pwd):
+    if len(pwd) <= 8:
+        return "#FA5339"
+
+    if contains_symboles() and contains_digits():
+        return "#4DFA46"
+    
+    return "#C74B1C"

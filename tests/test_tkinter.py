@@ -1,5 +1,6 @@
 from unittest import TestCase
 from src.application import Application
+from src.utilitaire import contains_digits, contains_symboles
 
 class TestTkinter(TestCase):
 
@@ -59,20 +60,20 @@ class TestTkinter(TestCase):
     # Check that the generated password contains at least one special character when the "Inclure des symboles" checkbox is checked
     def test_checkboxes_with_symboles(self):
         self.tk.chk_symboles_var.set(True)
-        self.assertTrue(any(c in "!@#$%^&*()_+-=[]{};:,.<>/?\\" for c in self.tk.lbl_resultat.cget("text")), f"Aucun caractère spécial n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
+        self.assertTrue(contains_symboles(self.tk.lbl_resultat.cget("text"))), f"Aucun caractère spécial n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
 
     # Check that the generated password contains at least one digit when the "Inclure des chiffres" checkbox is checked
     def test_checkboxes_with_digits(self):
         self.tk.chk_chiffres_var.set(True)
-        self.assertTrue(any(c.isdigit() for c in self.tk.lbl_resultat.cget("text")), f"Aucun nombre n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
+        self.assertTrue(contains_digits(self.tk.lbl_resultat.cget("text"))), f"Aucun nombre n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
 
     # Check both cheboxes
     def test_checkboxes_with_digits_and_symboles(self):
         self.tk.chk_chiffres_var.set(True)
         self.tk.chk_symboles_var.set(True)
 
-        self.assertTrue(any(c in "!@#$%^&*()_+-=[]{};:,.<>/?\\" for c in self.tk.lbl_resultat.cget("text")), f"Aucun caractère spécial n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
-        self.assertTrue(any(c.isdigit() for c in self.tk.lbl_resultat.cget("text")), f"Aucun nombre n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
+        self.assertTrue(contains_symboles(self.tk.lbl_resultat.cget("text"))), f"Aucun caractère spécial n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
+        self.assertTrue(contains_digits(self.tk.lbl_resultat.cget("text"))), f"Aucun nombre n'a été trouvé dans {self.tk.lbl_resultat.cget('text')}")
 
     # Click the "Copier" button and verify that the generated password is copied to the clipboard
     def test_copy_button(self):
