@@ -79,7 +79,7 @@ class TestGenererMotsDePasse(TestCase):
         """
         Vérifie si une chaîne de caractères ne contient pas de chiffres.
         """
-        self.assertFalse(contains_digits("FFgfh$ùgfhfghkofh"))
+        self.assertFalse(contains_digits("FFgfh?ùgfhfghkofh"))
 
     def test_contains_symboles(self):
         """
@@ -105,14 +105,14 @@ class TestGenererMotsDePasse(TestCase):
         """
         Vérifie la notation d'un mot de passe en rouge.
         """
-        pwd = "1f$"
-        self.assertEqual(notation_password(pwd), "#FA5339")
+        pwd = "1f?"
+        self.assertEqual(notation_password(pwd),"#FF0000")
 
     def test_notation_orange(self):
         """
         Vérifie la notation d'un mot de passe en orange.
         """
-        pwd = "gfgf12gmpolg"
+        pwd = "AZERTYUIOP"
         self.assertEqual(notation_password(pwd), "#C74B1C")
 
     def test_notation_green(self):
@@ -120,4 +120,4 @@ class TestGenererMotsDePasse(TestCase):
         Vérifie la notation d'un mot de passe en vert.
         """
         pwd = "gr13GF^$5687lkj"
-        self.assertEqual(notation_password(pwd),"#4DFA46")
+        self.assertEqual(notation_password(pwd),"#3bc736")
