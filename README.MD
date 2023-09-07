@@ -28,3 +28,32 @@ Des tests approfondis ont été réalisés pour s'assurer que la génération de
 ## Documentation
 
 Le code est documenté pour expliquer le fonctionnement de chaque fonction. Les dépendances nécessaires sont `tkinter` pour l'interface graphique et les modules `string` et `random` pour la génération du mot de passe.
+
+
+## Tableau des tests unitaires
+
+| Nom du cas du test | ID | Objectif | Préconditionnement | Action attendue du User | Action Système attendue | Données des tests | Critères de réussite | Status |
+|--------------------|----|----------|--------------------|-------------------------|-------------------------|-------------------|----------------------|--------|
+| Test Lettre | 1 | Vérifier que le mot de passe généré ne contient que des lettres | Aucun | Aucun | Générer un mot de passe | Longueur: 5, Chiffres: False, Symboles: False | Aucun chiffre dans le mot de passe | Réussi |
+| Test Caractère Spéciaux | 2 | Vérifier que le mot de passe généré contient au moins un caractère spécial | Aucun | Aucun | Générer un mot de passe | Longueur: 10, Chiffres: False, Symboles: True | Au moins un caractère spécial dans le mot de passe | Réussi |
+| Test Taille | 3 | Vérifier que le mot de passe généré a la longueur correcte | Aucun | Aucun | Générer un mot de passe | Longueur: 15, Chiffres: False, Symboles: False | Longueur du mot de passe = 15 | Réussi |
+| Test Hash | 4 | Vérifier que le mot de passe généré est correctement haché en utilisant SHA256 | Aucun | Aucun | Générer et hacher un mot de passe | Longueur: 8, Chiffres: False, Symboles: True | Le hash du mot de passe correspond au hash SHA256 | Réussi |
+| Test Type | 5 | Vérifier que le mot de passe généré est de type chaîne de caractères | Aucun | Aucun | Générer un mot de passe | Longueur: 8, Chiffres: False, Symboles: True | Le mot de passe est une chaîne de caractères | Réussi |
+| Test Taille Négative | 6 | Vérifier que la génération avec une taille négative lève une exception ValueError | Aucun | Aucun | Générer un mot de passe | Longueur: -5, Chiffres: False, Symboles: True | Une exception ValueError est levée | Réussi |
+| Test Taille Large | 7 | Vérifier si une grande taille est prise en charge par Python | Aucun | Aucun | Générer un mot de passe | Longueur: 3_000_000, Chiffres: False, Symboles: True | Longueur du mot de passe = 3_000_000 | Réussi |
+| Test Nombre | 8 | Vérifier que l'entrée non valide lève une exception ValueError | Aucun | Entrer "3" | Demander une entrée | "3" | Une exception ValueError est levée | Réussi |
+| Test Lettre | 9 | Vérifier que l'entrée est correctement traitée | Aucun | Entrer "o" | Demander une entrée | "o" | L'entrée est "o" | Réussi |
+| Test Lower | 10 | Vérifier que l'entrée est convertie en minuscule | Aucun | Entrer "O" | Demander une entrée | "O" | L'entrée est "o" | Réussi |
+| Test Slider Default | 11 | Vérifier que la longueur par défaut du mot de passe est de 14 caractères | Aucun | Aucun | Vérifier la valeur du slider | Aucun | La valeur du slider est 14 | Réussi |
+| Test Slider Update | 12 | Vérifier que le slider met à jour la longueur du mot de passe | Aucun | Déplacer le slider | Mettre à jour la valeur du slider | Nouvelle valeur: 20 | La valeur du slider est 20 | Réussi |
+| Test Slider Label Update | 13 | Vérifier que le label du slider est mis à jour | Aucun | Déplacer le slider | Mettre à jour le label du slider | Nouvelle valeur: 21 | Le label affiche "21" | Réussi |
+| Test Default Password | 14 | Vérifier que le mot de passe par défaut est généré | Aucun | Aucun | Afficher le mot de passe généré | Aucun | Le mot de passe est d'au moins 14 caractères | Réussi |
+| Test Instanciate Element | 15 | Vérifier si les éléments sont instanciés | Aucun | Aucun | Instancier les éléments | Aucun | Tous les éléments sont instanciés | Réussi |
+| Test Checkboxes Default | 16 | Vérifier que les checkboxes sont décochées par défaut | Aucun | Aucun | Vérifier l'état des checkboxes | Aucun | Les checkboxes sont décochées | Réussi |
+| Test Checkboxes Letters Only | 17 | Vérifier que le mot de passe généré ne contient que des lettres si les checkboxes sont décochées | Aucun | Désactiver les checkboxes | Générer un mot de passe | Checkboxes: False | Le mot de passe ne contient que des lettres | Réussi |
+| Test Checkboxes With Symbols | 18 | Vérifier que le mot de passe généré contient des symboles si la checkbox correspondante est cochée | Aucun | Activer la checkbox des symboles | Générer un mot de passe | Checkbox symboles: True | Le mot de passe contient au moins un symbole | Réussi |
+| Test Checkboxes With Digits | 19 | Vérifier que le mot de passe généré contient des chiffres si la checkbox correspondante est cochée | Aucun | Activer la checkbox des chiffres | Générer un mot de passe | Checkbox chiffres: True | Le mot de passe contient au moins un chiffre | Réussi |
+| Test Checkboxes Both | 20 | Vérifier que le mot de passe généré contient des chiffres et des symboles si les deux checkboxes sont cochées | Aucun | Activer les deux checkboxes | Générer un mot de passe | Checkboxes chiffres et symboles: True | Le mot de passe contient au moins un chiffre et un symbole | Réussi |
+| Test Copy Button | 21 | Vérifier que le bouton "Copier" copie le mot de passe dans le presse-papier | Aucun | Cliquer sur le bouton "Copier" | Copier le mot de passe dans le presse-papier | Aucun | Le presse-papier contient le mot de passe généré | Réussi |
+| Test Refresh Hash | 22 | Vérifier que le changement de hachage met à jour le texte du hash | Aucun | Changer le type de hachage | Mettre à jour le texte du hash | Nouveau hachage: md5 | Le texte du hash est différent de SHA256 | Réussi |
+| Test Title | 23 | Vérifier que le titre de l'application est correct | Aucun | Aucun | Afficher le titre de l'application | Aucun | Le titre est "Générateur de mot de passe" | Réussi |
