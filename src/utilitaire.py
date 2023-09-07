@@ -59,16 +59,43 @@ def demande_input(prompt):
     return res
 
 def contains_symboles(pwd):
+    """
+    Vérifie si une chaîne de caractères contient au moins un caractère spécial.
+
+    :param pwd: La chaîne de caractères à vérifier.
+    :type pwd: str
+
+    :return: True si la chaîne contient au moins un caractère spécial, False sinon.
+    :rtype: bool
+    """
     return any(c in "!@#$%^&*()_+-=[]{};:,.<>/?\\" for c in pwd)
 
 def contains_digits(pwd):
+    """
+    Vérifie si une chaîne de caractères contient au moins un chiffre.
+
+    :param pwd: La chaîne de caractères à vérifier.
+    :type pwd: str
+
+    :return: True si la chaîne contient au moins un chiffre, False sinon.
+    :rtype: bool
+    """
     return any(c.isdigit() for c in pwd)
 
 def notation_password(pwd):
-    if len(pwd) <= 8:
-        return "#FA5339"
+    """
+    Détermine la couleur de notation pour un mot de passe en fonction de sa longueur et de son contenu.
 
-    if contains_symboles(pwd) and contains_digits(pwd):
-        return "#4DFA46"
+    :param pwd: Le mot de passe à noter.
+    :type pwd: str
+
+    :return: La couleur de notation au format hexadécimal.
+    :rtype: str
+    """
+    if len(pwd) >= 12 or (len(pwd) > 8 and (contains_symboles(pwd) or contains_digits(pwd))):
+        return "#3bc736"  # Vert
     
-    return "#C74B1C"
+    if len(pwd) > 8:
+        return "#C74B1C"  # Orange
+    
+    return "#FF0000"  # Rouge
