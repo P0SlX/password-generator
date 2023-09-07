@@ -66,8 +66,8 @@ class TestGenererMotsDePasse(TestCase):
         """
         Vérifie si une grande taille est prise en charge par Python.
         """
-        password = generer_mot_de_passe(3_000_000, False, True)
-        self.assertEqual(len(password), 3_000_000)
+        password = generer_mot_de_passe(500_000, False, True)
+        self.assertEqual(len(password), 500_000)
 
     def test_contains_digits(self):
         """

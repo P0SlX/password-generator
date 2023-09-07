@@ -18,7 +18,7 @@ def generer_mot_de_passe(longueur: int, inclure_chiffres, inclure_symboles):
 
     # Shuffle de la base de caractères et on trim la longueur
     longueur = int(longueur)
-    caracteres = ''.join(random.sample(string.ascii_letters, longueur))
+    caracteres = ''.join(random.sample(string.ascii_letters*(max(longueur, len(string.ascii_letters))), longueur))
     position_deja_modifiee = []
     
     # Ajout des chiffres et des symboles si demandé
