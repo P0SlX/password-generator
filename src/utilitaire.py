@@ -3,7 +3,7 @@ import random
 import hashlib
 from re import search
 
-def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
+def generer_mot_de_passe(longueur: int, inclure_chiffres, inclure_symboles):
     """
     Génère un mot de passe aléatoire en utilisant les options spécifiées.
     
@@ -16,20 +16,34 @@ def generer_mot_de_passe(longueur, inclure_chiffres, inclure_symboles):
     if longueur <= 0:
         raise ValueError("La taille du mot de passe doit être supérieur à 0")
 
-    # Base du mot de passe : lettres majuscules et minuscules
-    caracteres = string.ascii_letters
+    # Shuffle de la base de caractères et on trim la longueur
+    longueur = int(longueur)
+    caracteres = ''.join(random.sample(string.ascii_letters, longueur))
+    position_deja_modifiee = []
     
     # Ajout des chiffres et des symboles si demandé
     if inclure_chiffres:
-        caracteres += string.digits
+        # On ajoute des chiffres à des positions aléatoires et on mémorise les positions déjà modifiées
+        for _ in range(random.randint(1, longueur // 4)):
+            position = random.randint(0, len(caracteres) - 1)
+            while position in position_deja_modifiee:
+                position = random.randint(0, len(caracteres) - 1)
+            caracteres = caracteres[:position] + random.choice("0123456789") + caracteres[position + 1:]
+            position_deja_modifiee.append(position)
+            
 
     # Ajout des symboles si demandé
     if inclure_symboles:
-        caracteres += string.punctuation
+        # On ajoute des symboles à des positions aléatoires et on mémorise les positions déjà modifiées
+        for _ in range(random.randint(1, longueur // 4)):
+            position = random.randint(0, len(caracteres) - 1)
+            while position in position_deja_modifiee:
+                position = random.randint(0, len(caracteres) - 1)
+            caracteres = caracteres[:position] + random.choice("!@#$%^&*()_+-=[]{};:,.<>/?\\") + caracteres[position + 1:]
+    
 
     # Génération du mot de passe à partir de la base de caractères
-    return ''.join(random.choice(caracteres) for _ in range(int(longueur)))
-
+    return caracteres
 
 def hash_password(pwd, hash_method='sha256'):
     """
