@@ -18,7 +18,9 @@ Des tests approfondis ont été réalisés pour s'assurer que la génération de
 
 ## Utilisation
 
-1. Lancez le programme.
+Il est nécessaire d'avoir python3.10 d'installé.
+
+1. Lancez le programme (python src/main.py).
 2. Utilisez le slider pour définir la longueur souhaitée du mot de passe.
 3. Sélectionnez si vous souhaitez inclure des chiffres et/ou des symboles.
 4. Le mot de passe généré s'affichera automatiquement à chaque modification des paramètres.
@@ -31,6 +33,8 @@ Le code est documenté pour expliquer le fonctionnement de chaque fonction. Les 
 
 
 ## Tableau des tests unitaires
+
+Pour l'exécution des tests : python -m unittest tests/test_suite.py
 
 | Nom du cas du test | ID | Objectif | Préconditionnement | Action attendue du User | Action Système attendue | Données des tests | Critères de réussite | Status |
 |--------------------|----|----------|--------------------|-------------------------|-------------------------|-------------------|----------------------|--------|
